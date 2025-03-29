@@ -1,0 +1,65 @@
+# 忽略 Qt Creator 和 CMake 生成的文件
+*.pro.user
+*.pro.user.*
+*.qmake.stash
+CMakeLists.txt.user
+
+# 忽略 Qt 生成的 MOC、UI、RCC 相关文件
+moc_*.cpp
+moc_*.h
+ui_*.h
+qrc_*.cpp
+
+# 编译输出目录
+build*/
+cmake-build-*/
+dist*/
+
+# 忽略 CMake 生成的中间文件
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+Makefile
+*.cmake
+*.cbp
+
+# 忽略可执行文件和动态链接库
+*.exe
+*.dll
+*.so
+*.dylib
+*.app
+*.out
+
+# Qt 生成的 `.qrc` 资源文件缓存
+*.rcc
+
+# Qt Installer Framework 生成的文件
+*.7z
+*.zip
+*.tar.gz
+*.dmg
+*.deb
+*.rpm
+
+# 忽略 Qt Creator 和 VS Code 配置文件
+.idea/
+.vscode/
+.clangd
+*.code-workspace
+
+# 编译过程中产生的日志文件
+*.log
+
+# Qt 相关测试文件
+tests/*.o
+tests/*.gcda
+tests/*.gcno
+
+# 其他不必要的临时文件
+*.bak
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
