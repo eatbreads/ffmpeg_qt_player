@@ -17,9 +17,9 @@
    <widget class="QLabel" name="video_window">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>50</y>
-      <width>591</width>
+      <x>350</x>
+      <y>60</y>
+      <width>381</width>
       <height>291</height>
      </rect>
     </property>

@@ -4,15 +4,7 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <QLabel>  // 添加 QLabel 头文件
-extern "C" {
-#include <libavcodec/avcodec.h>
-#include <libavformat/avformat.h>
-#include <libswscale/swscale.h>
-#include <libavdevice/avdevice.h>
-#include <libavutil/time.h>
-#include <libavutil/mathematics.h>
-#include <libavutil/imgutils.h>
-}
+#include "videoplayer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -31,19 +23,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-
-
-    // FFmpeg 相关变量
-    AVFormatContext *pFormatCtx = nullptr;
-    AVCodecContext *pAVctx = nullptr;
-    const AVCodec *pCodec = nullptr;
-    AVPacket *pAVpkt = nullptr;
-    AVFrame *pAVframe = nullptr;
-    AVFrame *pAVframeRGB = nullptr;
-    SwsContext *pSwsCtx = nullptr;
-    unsigned char *buf = nullptr;
-    int streamIndex = -1;
-    int isVideo = -1;
+    VideoPlayer * player;
 };
 
 #endif // MAINWINDOW_H
