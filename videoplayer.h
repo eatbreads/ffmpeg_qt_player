@@ -8,6 +8,7 @@
 #include <QMutex>
 #include <QDebug>
 #include <QCoreApplication>
+#include <QAudioFormat>
 #include <QTime>
 // FFmpeg 头文件
 extern "C" {

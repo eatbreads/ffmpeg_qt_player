@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Multimedia)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -24,6 +24,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         videoplayer.h videoplayer.cpp
+        audiorecorder.h audiorecorder.cpp
+        audioplayer.h audioplayer.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET untitled1 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -44,15 +46,26 @@ else()
 endif()
 
 
-set(FFMPEG_ROOT "E:/ffmpeg-7.1.1-full_build-shared")
+set(FFMPEG_ROOT "E:/ffmpeg-7.0.2-full_build-shared")
 include_directories(${FFMPEG_ROOT}/include)
 link_directories(${FFMPEG_ROOT}/lib)
 
+find_library(AVDEVICE_LIBRARY avdevice PATHS ${FFMPEG_ROOT}/lib)
 find_library(AVFORMAT_LIBRARY avformat PATHS ${FFMPEG_ROOT}/lib)
 find_library(AVCODEC_LIBRARY avcodec PATHS ${FFMPEG_ROOT}/lib)
 find_library(AVUTIL_LIBRARY avutil PATHS ${FFMPEG_ROOT}/lib)
 find_library(SWSCALE_LIBRARY swscale PATHS ${FFMPEG_ROOT}/lib)
-target_link_libraries(untitled1 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets ${AVFORMAT_LIBRARY} ${AVCODEC_LIBRARY} ${AVUTIL_LIBRARY} ${SWSCALE_LIBRARY})
+find_library(SWRESAMPLE_LIBRARY swresample PATHS ${FFMPEG_ROOT}/lib)
+target_link_libraries(untitled1 PRIVATE
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt6::Multimedia
+    ${AVDEVICE_LIBRARY}
+    ${AVFORMAT_LIBRARY}
+    ${AVCODEC_LIBRARY}
+    ${AVUTIL_LIBRARY}
+    ${SWSCALE_LIBRARY}
+    ${SWRESAMPLE_LIBRARY}
+)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

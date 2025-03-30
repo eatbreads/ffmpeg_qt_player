@@ -31,13 +31,39 @@
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>390</y>
-      <width>601</width>
+      <y>320</y>
+      <width>291</width>
       <height>81</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>开始播放视频</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="recordButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>460</y>
+      <width>601</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>开始录音</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="audioButton">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>322</y>
+      <width>291</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>播放音频</string>
     </property>
    </widget>
   </widget>

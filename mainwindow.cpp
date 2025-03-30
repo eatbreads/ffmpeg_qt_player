@@ -26,12 +26,13 @@ extern "C"
 // 主窗口构造函数
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::MainWindow),recorder(new AudioRecorder(this))
 {
     ui->setupUi(this);
 
-    player = new VideoPlayer(this);
-    player->setVideoLabel(ui->video_window);
+    videoplayer = new VideoPlayer(this);
+    audioplayer = new AudioPlayer(this);
+    videoplayer->setVideoLabel(ui->video_window);
 
 }
 MainWindow::~MainWindow()
@@ -44,8 +45,37 @@ void MainWindow::on_open_button_clicked()
 {
 
     QString filePath = QFileDialog::getOpenFileName(this, "选择视频文件", "", "Video Files (*.mp4 *.avi)");
-    if (!filePath.isEmpty() && player->loadVideo(filePath))
+    if (!filePath.isEmpty() && videoplayer->loadVideo(filePath))
     {
-        player->play();
+        videoplayer->play();
     }
 }
+
+void MainWindow::on_recordButton_clicked()
+{
+    if (!recorder->isRunning()) {
+        recorder->startRecording();
+        ui->recordButton->setText("停止录音");
+    } else {
+        recorder->stopRecording();
+        ui->recordButton->setText("开始录音");
+    }
+
+}
+
+
+void MainWindow::on_audioButton_clicked()
+{
+
+    if (!audioplayer->isRunning()) {
+        QString filePath = QFileDialog::getOpenFileName(this, "选择视频文件", "", "Video Files (*.mp4 *.wav)");
+        audioplayer->startPlaying(filePath);
+        ui->audioButton->setText("停止播放音频");
+    } else {
+
+        audioplayer->stopPlaying();
+        ui->audioButton->setText("开始播放音频");
+
+    }
+}
+
